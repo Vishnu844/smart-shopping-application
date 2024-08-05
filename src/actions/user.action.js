@@ -1,6 +1,6 @@
 "use server";
 
-import User from "@/modals/user.modal";
+const User = require("@/models/user.model");
 import connectToDB from "../../db";
 
 export async function createUser(user) {
