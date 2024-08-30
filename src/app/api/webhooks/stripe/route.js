@@ -74,9 +74,3 @@ export async function POST(req) {
     return NextResponse.json({ status: 500, message: err.message });
   }
 }
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
