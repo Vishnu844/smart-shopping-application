@@ -27,9 +27,17 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
   },
-  phone:{
-    type: String
-  }
+  phone: {
+    type: String,
+  },
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "cart",
+  },
+  orders: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "orders",
+  },
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);

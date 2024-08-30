@@ -1,7 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { clerkClient, WebhookEvent } from "@clerk/nextjs/server";
-import { createUser } from "@/actions/user.action";
+import { clerkClient } from "@clerk/nextjs/server";
+import { createUser, updateUser } from "@/actions/user.action";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -50,9 +50,6 @@ export async function POST(req) {
     });
   }
 
-  // Do something with the payload
-  // For this guide, you simply log the payload to the console
-  const { id } = evt.data;
   const eventType = evt.type;
 
   if (eventType === "user.created") {
@@ -73,7 +70,7 @@ export async function POST(req) {
     const newUser = await createUser(user);
 
     if (newUser) {
-      await clerkClient.users.updateUserMetadata(id, {
+      await clerkClient().users.updateUserMetadata(id, {
         publicMetadata: {
           userId: newUser._id,
         },
@@ -82,8 +79,26 @@ export async function POST(req) {
 
     return NextResponse.json({ message: "New user created", user: newUser });
   }
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log("Webhook body:", body);
+
+  if (eventType == "user.updated") {
+    const { id, email_addresses, image_url, first_name, last_name, username } =
+      evt.data;
+
+    const user = {
+      email: email_addresses[0].email_address,
+      username: username,
+      photo: image_url,
+      firstName: first_name,
+      lastName: last_name,
+    };
+
+    const updatedUser = await updateUser({ clerkId: id }, user);
+
+    return NextResponse.json({
+      message: "Updated user created",
+      user: updatedUser,
+    });
+  }
 
   return new Response("", { status: 200 });
 }

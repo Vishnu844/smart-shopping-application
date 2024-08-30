@@ -3,6 +3,7 @@ import "./globals.css";
 import { ClerkProvider, ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Loading from "@/components/Loading";
+import ReduxWrapper from "@/components/ReduxWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({ children }) {
           <ClerkLoading>
             <Loading />
           </ClerkLoading>
-          <ClerkLoaded>{children}</ClerkLoaded>
+          <ClerkLoaded>
+            <ReduxWrapper>{children}</ReduxWrapper>
+          </ClerkLoaded>
         </body>
       </html>
     </ClerkProvider>
