@@ -117,5 +117,5 @@ export const slides = [
   },
 ];
 
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://my-smart-shopping-app.netlify.app";
 export const PRODUCTS_URL = "https://dummyjson.com/products";
