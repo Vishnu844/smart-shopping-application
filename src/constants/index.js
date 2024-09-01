@@ -74,6 +74,25 @@ export const navigation = [
   { title: "About", path: "/about" },
 ];
 
+export const stats = [
+  {
+    data: "35K",
+    title: "Customers",
+  },
+  {
+    data: "10K+",
+    title: "Downloads",
+  },
+  {
+    data: "40+",
+    title: "Countries",
+  },
+  {
+    data: "30M+",
+    title: "Total revenue",
+  },
+];
+
 export const slides = [
   {
     id: 1,

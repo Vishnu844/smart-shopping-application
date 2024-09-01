@@ -5,8 +5,8 @@ const orderSchema = new mongoose.Schema({
   items: {
     type: Array,
   },
-  address: { type: String, required: true },
-  phone: { type: String, required: true },
+  address: { type: String },
+  phone: { type: String },
   paymentId: { type: String, required: true },
   paymentStatus: { type: String, required: true },
   totalAmount: { type: Number, required: true }, // Stored in cents

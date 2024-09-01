@@ -30,7 +30,7 @@ const CheckoutButton = () => {
     });
 
     if (error) {
-      console.error(error);
+      alert(error.message);
     }
   };
 
