@@ -1,4 +1,3 @@
-import React from "react";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
 const Pagination = ({ total, page, setPage }) => {
@@ -13,7 +12,7 @@ const Pagination = ({ total, page, setPage }) => {
     }
   };
 
-  const maxPagesToShow = 10;
+  const maxPagesToShow = 5;
   let startPage = Math.max(1, page - Math.floor(maxPagesToShow / 2));
   let endPage = startPage + maxPagesToShow - 1;
 

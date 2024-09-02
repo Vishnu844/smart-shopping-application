@@ -1,15 +1,16 @@
 "use client";
 
-import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { syncCart } from "@/store/slices/cart-slice";
+import { useUser } from "@clerk/nextjs";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-const CheckoutButton = () => {
+const CheckoutButton = ({ triggerNotification }) => {
+  const user = useUser();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
@@ -30,13 +31,18 @@ const CheckoutButton = () => {
     });
 
     if (error) {
-      alert(error.message);
+      triggerNotification({
+        type: "error",
+        message: "Something went wrong, Try again later!!",
+        duration: 3000,
+      });
     }
   };
 
   return (
     <button
       type="submit"
+      disabled={user ? true : false}
       className="w-full text-center bg-black rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-gray-800"
       onClick={handleCheckout}
     >

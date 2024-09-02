@@ -7,11 +7,13 @@ import CheckoutButton from "./CheckoutButton";
 import Loading from "./Loading";
 import CartItem from "./CartItem";
 import Error from "./Error";
+import useNotification from "@/hooks/useNotification";
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
   const cartStatus = useSelector((state) => state.cart.status);
+  const { NotificationComponent, triggerNotification } = useNotification();
 
   React.useEffect(() => {
     dispatch(loadCart());
@@ -27,6 +29,7 @@ const CartPage = () => {
 
   return (
     <>
+      {NotificationComponent}
       <section className=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50">
         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative z-10">
           <div className="grid grid-cols-12">
@@ -63,7 +66,7 @@ const CartPage = () => {
               })}
             </div>
             <div className=" col-span-12 xl:col-span-4 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:pl-8 py-24">
-              <CheckoutButton />
+              <CheckoutButton triggerNotification={triggerNotification} />
             </div>
           </div>
         </div>

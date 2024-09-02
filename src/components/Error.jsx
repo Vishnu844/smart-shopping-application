@@ -1,4 +1,3 @@
-import React from "react";
 import errorImg from "../../public/images/error.svg";
 import Image from "next/image";
 

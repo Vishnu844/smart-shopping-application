@@ -3,7 +3,7 @@
 import { addToCart } from "@/store/slices/cart-slice";
 import { useDispatch } from "react-redux";
 
-function AddToCartButton({ productDetails }) {
+function AddToCartButton({ productDetails, triggerNotification }) {
   const { id, title, thumbnail, price, brand } = productDetails;
   const product = {
     productId: id,
@@ -16,7 +16,11 @@ function AddToCartButton({ productDetails }) {
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
-    alert("Product has been added successfully");
+    triggerNotification({
+      type: "success",
+      message: "Product has been added to cart",
+      duration: 3000,
+    });
   };
   return (
     <button

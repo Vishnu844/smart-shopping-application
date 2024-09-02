@@ -1,3 +1,6 @@
+import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
+import { BsInfoCircle } from "react-icons/bs";
+
 export const ratings = [
   {
     id: 1,
@@ -116,6 +119,21 @@ export const slides = [
     url: "/products",
   },
 ];
+
+export const icons = {
+  success: {
+    icon: <FaRegCircleCheck className="text-green-600" />,
+    summary: "Success!!",
+  },
+  info: {
+    icon: <BsInfoCircle className="text-blue-600" />,
+    summary: "Alert!!",
+  },
+  error: {
+    icon: <FaRegCircleXmark className="text-red-600" />,
+    summary: "Error!!",
+  },
+};
 
 export const BASE_URL = "https://my-smart-shopping-app.netlify.app";
 export const PRODUCTS_URL = "https://dummyjson.com/products";

@@ -52,8 +52,13 @@ const ProductsGrid = ({ search }) => {
     fetchProducts();
   }, [selectedCategory, page, search]);
 
-  if (error) {
-    return <Error />;
+  if (products?.length === 0 || error) {
+    return (
+      <>
+        <Error />
+        <p className="text-center mb-8">Try to search for something different!</p>
+      </>
+    );
   }
 
   return (

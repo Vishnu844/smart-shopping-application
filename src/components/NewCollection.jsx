@@ -28,7 +28,7 @@ const NewCollection = () => {
 
   if (error) {
     return (
-      <p className="text-center text-2xl font-bold text-red-500">
+      <p className="text-center text-2xl font-bold text-black">
         Failed to Fetch Products
       </p>
     );
