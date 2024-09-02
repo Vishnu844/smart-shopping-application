@@ -18,10 +18,15 @@ const ProductsGrid = ({ search }) => {
   const [products, setProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
+  const [toggle, setToggle] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = React.useState("");
   const [filteredProducts, setFilteredProducts] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [total, setTotal] = React.useState(0);
+
+  const handleClick = () => {
+    setToggle(!toggle);
+  };
 
   React.useEffect(() => {
     const fetchProducts = async () => {
@@ -56,7 +61,9 @@ const ProductsGrid = ({ search }) => {
     return (
       <>
         <Error />
-        <p className="text-center mb-8">Try to search for something different!</p>
+        <p className="text-center mb-8">
+          Try to search for something different!
+        </p>
       </>
     );
   }
@@ -65,14 +72,17 @@ const ProductsGrid = ({ search }) => {
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-4 lg:px-8">
         <div className="mt-4 block lg:hidden">
-          <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
+          <button
+            className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
+            onClick={handleClick}
+          >
             <span className="text-sm font-medium"> Filters & Sorting </span>
             <FaArrowRightLong className="size-4" />
           </button>
         </div>
 
         <div className="my-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
-          <div className="hidden space-y-4 lg:block">
+          <div className={`${toggle ? "block" : "hidden"} space-y-4 lg:block`}>
             <div>
               <select
                 id="SortBy"
@@ -87,7 +97,7 @@ const ProductsGrid = ({ search }) => {
             <div>
               <p className="block text-xs font-medium text-gray-700">Filters</p>
 
-              <div className="mt-1 space-y-2">
+              <div className="mt-1 mb-4 space-y-2">
                 <AvailabilityDropdown
                   products={products}
                   setFilteredProducts={setFilteredProducts}

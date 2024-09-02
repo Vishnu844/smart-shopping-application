@@ -5,6 +5,7 @@ import Layout from "@/components/Layout";
 import Link from "next/link";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa6";
+import OrderSummary from "@/components/OrderSummary";
 
 const About = () => {
   return (
